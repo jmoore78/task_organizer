@@ -1,0 +1,108 @@
+* {
+    padding: 0;
+    margin: 0 auto;
+}
+
+#listbody {
+    padding: 0px 10px;
+    width: 100%; /* set for responsiveness */
+    text-align: center;
+}
+
+#formcontainer {
+    width: 100%;
+}
+
+textarea {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    padding: 5px;
+    resize: none;
+}
+
+label[for=task_name], label[for=task_description] {
+    font-size: 150%;
+}
+
+tr {
+    margin-bottom: 15px;
+}
+
+th {
+    font-size: 130%;
+    text-decoration: underline;
+}
+
+#listbody > table, th, td {
+    width: 400px;
+    border: 1px solid black;
+    background-color: lightskyblue;
+    padding: 5px;
+    align-items: center;
+    border-radius: 5px;
+}
+
+#entryerror {
+    height: 75px;
+    width:250px;
+    text-align: center;
+    margin-top: 15px;
+    color: white;
+    text-shadow: 2px 2px 4px #f10606;
+    text-decoration: bold;
+    font-size: 100%;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+#emptylist {
+    height: 75px;
+    width:300px;
+    text-align: center;
+    margin-top: 15px;
+    text-indent: 5px;
+    font-size: 100%;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+#frm {
+    display: flex;
+    flex-direction: column;
+}
+
+#frm > label {
+    font-weight: bold;
+}
+
+button {
+    padding: 4px;
+    font-weight: bold;
+    background-color: lightskyblue;
+    border-radius: 3px;
+    border: none;
+    box-shadow: 3px 3px;
+}
+
+button:hover {
+    background-color: rgb(60, 212, 40);
+}
+
+.contentbody {
+    /* height: 400px; */
+    width: 700px;
+    background-color: lightslategray;
+    border-radius: 5px;
+    margin-top: 30px;
+    padding: 20px;
+}
+
+.banner {
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

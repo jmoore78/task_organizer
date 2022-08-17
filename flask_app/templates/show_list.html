@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="contentbody">
+        <div class="banner">
+            <h2>Current Task List</h2>
+            <a href="/"><button>Add Task</button></a><!--takes the user back to the home page if they want to enter another task-->
+        </div>
+        <div id="listbody">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks %} <!--iterate tasks list (line 30 task.py) to get dict items-->
+                    <tr>
+                        <td>{{ task.task_name.title() }}</td> <!--displays all task names if present in the database (passed from route function SHOW_LIST) -->
+                        <td>{{ task.task_description }}</td> <!--Jinja2 dot notation to access dict value-->
+                        <td>
+                            <a  href="/edit/task/{{task.id}}">Edit</a> | 
+                            <a href="/destroy/task/{{task.id}}">Delete</a> <!--reference the task id and passed as a route variable in the destroy route-->
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% with messages = get_flashed_messages(category_filter=['validate_edit_task']) %}<!--error message if the entry doesn't pass form validation (line 24 server.py)-->
+                {% if messages %}
+                <div id="entryerror">
+                    <h3>Uh Oh!</h3>
+                    {% for message in messages %}<!--Jinja Statement Delimiter: loops through the messages using the variable filter as an identifier-->
+                        <p>{{message}}</p><!--Jinja expression delimiter displays the chosen message-->
+                    {% endfor %}
+                </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+</body>
+</html>

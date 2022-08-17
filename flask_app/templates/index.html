@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="contentbody">
+        <div class="banner">
+            <h2>New Task Entry</h2>
+            <a href="/show/list"><button>Task List</button></a> <!--allows the user to access the current list-->
+        </div>
+        <div id="formcontainer">
+            <form action="/create/task" method="post" id="frm"> <!--identifies the post route that will handle the form data-->
+                <label for="task_name">Task</label>
+                <textarea id="task_name" name="task_name" rows="2" cols="25"></textarea>
+                <label for="task_description">Description</label>
+                <textarea id="task_description" name="task_description" rows="4" cols="25"></textarea>
+                <button type="submit" id="add_task">Add Task</button>
+            </form>
+        </div>
+        {% with messages = get_flashed_messages(category_filter=['validate_new_task']) %}<!--error message if the entry doesn't pass form validation (line 24 server.py)-->
+            {% if messages %}
+            <div id="entryerror">
+                <h3>Uh Oh!</h3>
+                {% for message in messages %}<!--Jinja Statement Delimiter: loops through the messages using the variable filter as an identifier-->
+                    <p>{{message}}</p><!--Jinja expression delimiter displays the chosen message-->
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>

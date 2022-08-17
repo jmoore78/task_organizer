@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="contentbody">
+        <div class="banner">
+            <h2>Edit Task</h2>
+            <a href="/show/list"><button>Task List</button></a> <!--allows the user to access the current list-->
+        </div>
+        <div id="formcontainer">
+            <form action="/update/task" method="post" id="frm"> <!--identifies the post route that will handle the form data-->
+                <input type="hidden" name="id" value={{edit.id}}> <!--from controllers edit_task function-->
+                <label for="task_name">Task</label>
+                <textarea id="task_name" name="task_name" rows="2" cols="25">{{edit.task_name}}</textarea> <!--name="task_name" is the name of the control. it is the value for the "task_name" in the data dictionary that is passed to databse in the update_task route function.-->
+                <label for="task_description">Description</label>
+                <textarea id="task_description" name="task_description" rows="4" cols="25">{{edit.task_description}}</textarea>
+                <button type="submit" id="add_task">Update</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
