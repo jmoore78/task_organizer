@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request, session, flash
+from flask import render_template, redirect, request
 from flask_app import app
 from flask_app.models.task import Task
 # Route Security: Although a small application, I chose to keep the GET and POST routes separate 

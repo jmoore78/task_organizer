@@ -1,0 +1,7 @@
+Add login form
+
+Add date option (date entered and date due)
+
+Improve CSS appearance (spacing, color scheme, etc.)
+
+Add email notifier option

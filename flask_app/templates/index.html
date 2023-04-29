@@ -25,7 +25,7 @@
         {% with messages = get_flashed_messages(category_filter=['validate_new_task']) %}<!--error message if the entry doesn't pass form validation (line 24 server.py)-->
             {% if messages %}
             <div id="entryerror">
-                <h3>Uh Oh!</h3>
+                <h3>Entry Error</h3>
                 {% for message in messages %}<!--Jinja Statement Delimiter: loops through the messages using the variable filter as an identifier-->
                     <p>{{message}}</p><!--Jinja expression delimiter displays the chosen message-->
                 {% endfor %}

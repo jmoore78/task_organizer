@@ -12,7 +12,7 @@ class Task:
     
 #--------class methods to interface with the database--------
     @classmethod
-    def save(cls, data): # bind variable and prepared statements to protect against SQL injection
+    def save(cls, data): # bind variable and prepared statements (VALUE parameters) to protect against SQL injection
         query = "INSERT INTO tasks ( task_name , task_description ) VALUES ( %(task_name)s , %(task_description)s );"
         results = connectToMySQL(cls.db_name).query_db(query,data)
         print(f"save RESULTS: {results}") # INSERT queries will return the ID NUMBER of the row inserted
@@ -20,7 +20,7 @@ class Task:
 
     @classmethod
     def get_all(cls):
-        query = "SELECT * FROM tasks;"
+        query = "SELECT * FROM tasks;" # SELECT is used to fetch data from the database. * is a wildcard used to denote "all"
         results = connectToMySQL(cls.db_name).query_db(query) # list of dictionaries
         # print(f"get_all Results: {results}")
         return results # used on the show_list page to display all of the current tasks 
@@ -33,8 +33,8 @@ class Task:
         return result[0] # returning the dictionary of data using list indexing to the edit_task route function (GET request) 
 
     @classmethod
-    def update(cls,data):
-        query = "UPDATE tasks SET task_name=%(task_name)s, task_description=%(task_description)s, updated_at=NOW() WHERE id = %(id)s;"
+    def update(cls,data): # Update allows the user to change the data (edit) already created/added to the row. SET indicates the column to edit.
+        query = "UPDATE tasks SET task_name=%(task_name)s, task_description=%(task_description)s, updated_at=NOW() WHERE id = %(id)s;" # WHERE identifies which row to update.
         return connectToMySQL(cls.db_name).query_db(query,data)
 
     @classmethod
@@ -50,7 +50,7 @@ class Task:
         is_valid = True
         if len(new_task["task_name"]) < 1:
             is_valid = False
-            flash("Task Name cannot be blank", "validate_new_task")
+            flash("Task name cannot be blank", "validate_new_task")
         if len(new_task["task_description"]) < 1:
             is_valid = False
             flash("Please describe the task", "validate_new_task")
@@ -76,3 +76,14 @@ class Task:
                 is_valid = False
                 flash("Task Description must be unique", "validate_edit_task")
         return is_valid
+
+# Class method vs Static Method
+# The difference between the Class method and the static method is:
+
+# A class method takes cls as the first parameter while a static method needs no specific parameters.
+# A class method can access or modify the class state while a static method can’t access or modify it.
+# In general, static methods know nothing about the class state. They are utility-type methods that take some parameters and work upon those parameters. On the other hand class methods must have class as a parameter.
+# We use @classmethod decorator in python to create a class method and we use @staticmethod decorator to create a static method in python.
+# When to use the class or static method?
+# We generally use the class method to create factory methods. Factory methods return class objects ( similar to a constructor ) for different use cases.
+# We generally use static methods to create utility functions.
